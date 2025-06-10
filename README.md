@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Amino Acid Sequence Alignment Tool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+👩‍🔬 Тестовое задание для BIOCAD  
+🧬 Инструмент визуального сравнения двух аминокислотных последовательностей с цветовой маркировкой различий.
 
-## Available Scripts
+## 🚀 Стек
 
-In the project directory, you can run:
+- **React** (с использованием функциональных компонентов и хуков)
+- **MUI (Material UI)** — стилизация и адаптивность
+- **TypeScript** — типобезопасность и масштабируемость
 
-### `npm start`
+## ⚙️ Функциональность
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Ввод двух аминокислотных последовательностей
+- Проверка валидности символов (только допустимые аминокислоты и символ "-")
+- Сравнение двух последовательностей:
+  - Подсветка символов, которые различаются
+  - Цветовая кодировка по типу аминокислот
+- Адаптивная верстка для мобильных устройств
+- Очистка полей одним нажатием
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🎨 Цветовая схема аминокислот
 
-### `npm test`
+Каждая аминокислота имеет свой уникальный цвет, облегчающий визуальное восприятие различий.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```ts
+const aminoAcidColors: Record<string, string> = {
+  A: "#67e446", R: "#bb99ff", N: "#80bfff", D: "#fc9cac", C: "#ffeao0",
+  E: "#fc9cac", Q: "#80bfff", G: "#c4c4c4", H: "#80bfff", I: "#67e446",
+  L: "#67e446", K: "#bb99ff", M: "#67e446", F: "#67e446", P: "#67e446",
+  S: "#80bfff", T: "#80bfff", W: "#67e446", Y: "#67e446", V: "#67e446",
+};
+```
+```bash
+git clone https://github.com/your-username/alignment-tool.git
+cd alignment-tool
+npm install
+npm start
+```
 
-### `npm run build`
+📄 Валидация
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Допустимые символы: A, R, N, D, C, E, Q, G, H, I, L, K, M, F, P, S, T, W, Y, V, -
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Обе последовательности должны быть одинаковой длины для сравнения.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🧪 Использование
+	1.	Введите две последовательности.
+	2.	Нажмите “Сравнить”.
+	3.	Если последовательности совпадают — это будет видно.
+	4.	Несовпадающие символы будут подсвечены.
 
-### `npm run eject`
+🧹 Очистка
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Кнопка “Очистить” сбрасывает поля и скрывает результат сравнения.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Stack, styled, useMediaQuery, useTheme } from "@mui/system";
+import { styled, useMediaQuery, useTheme } from "@mui/system";
 
 const aminoAcidColors: Record<string, string> = {
     A: "#67e446",
@@ -134,6 +134,12 @@ const AlignmentTool: React.FC = () => {
         setShowAlignment(false);
     };
 
+    function getLabel(number: number, seq2: string) {
+        return `Последовательность ${number}${
+            seq2.length !== 0 ? " - Длина: " + seq2.length : ""
+        }`;
+    }
+
     return (
         <Box
             sx={{
@@ -153,7 +159,7 @@ const AlignmentTool: React.FC = () => {
                     <Grid>
                         <TextField
                             fullWidth
-                            label="Последовательность 1"
+                            label={getLabel(1, seq1)}
                             value={seq1}
                             onChange={(e) => handleSeqChange(e, setSeq1)}
                             error={!!error}
@@ -162,7 +168,7 @@ const AlignmentTool: React.FC = () => {
                     <Grid>
                         <TextField
                             fullWidth
-                            label="Последовательность 2"
+                            label={getLabel(2, seq2)}
                             value={seq2}
                             onChange={(e) => handleSeqChange(e, setSeq2)}
                             error={!!error}
