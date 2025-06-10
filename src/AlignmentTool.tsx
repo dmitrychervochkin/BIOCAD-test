@@ -39,10 +39,10 @@ const ChunkedRow = styled(Box)(({ theme }) => ({
 const AminoBox = styled(Box)<{ bgcolor: string }>(({ bgcolor }) => ({
     padding: "2px 4px",
     margin: "1px",
+    minWidth: "20px",
     backgroundColor: bgcolor,
     color: "#000",
     borderRadius: "4px",
-    minWidth: "20px",
     textAlign: "center",
 }));
 
@@ -142,33 +142,84 @@ const AlignmentTool: React.FC = () => {
             const chunk2 = seq2.slice(i, i + CHUNK_SIZE);
             chunks.push(
                 <Box key={i} sx={{ mb: 1 }}>
-                    <ChunkedRow>
-                        {chunk1.split("").map((char, idx) => (
-                            <AminoBox
-                                key={idx}
-                                bgcolor={aminoAcidColors[char] || "#FFF"}
-                            >
-                                {char}
-                            </AminoBox>
-                        ))}
-                    </ChunkedRow>
-                    <ChunkedRow>
-                        {chunk2.split("").map((char, idx) => {
-                            const refChar = chunk1[idx];
-                            return (
+                    <Box
+                        sx={{
+                            position: "relative",
+                        }}
+                    >
+                        <ChunkedRow>
+                            {chunk1.split("").map((char, idx) => (
                                 <AminoBox
                                     key={idx}
-                                    bgcolor={
-                                        char !== refChar
-                                            ? aminoAcidColors[char] || "#FFF"
-                                            : "transparent"
-                                    }
+                                    bgcolor={aminoAcidColors[char] || "#FFF"}
                                 >
                                     {char}
                                 </AminoBox>
-                            );
-                        })}
-                    </ChunkedRow>
+                            ))}
+                        </ChunkedRow>
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: "3px",
+                                left: "11px",
+                                color: "transparent",
+                                userSelect: "text",
+                                pointerEvents: "none",
+                                whiteSpace: "pre-wrap",
+                                width: "100%",
+                                height: "100%",
+                                fontFamily: "monospace",
+                                fontSize: "inherit",
+                                zIndex: -1,
+                                letterSpacing: "22px",
+                            }}
+                        >
+                            {chunk1}
+                        </Box>
+                    </Box>
+                    <Box
+                        sx={{
+                            position: "relative",
+                        }}
+                    >
+                        <ChunkedRow>
+                            {chunk2.split("").map((char, idx) => {
+                                const refChar = chunk1[idx];
+                                return (
+                                    <AminoBox
+                                        key={idx}
+                                        bgcolor={
+                                            char !== refChar
+                                                ? aminoAcidColors[char] ||
+                                                  "#FFF"
+                                                : "transparent"
+                                        }
+                                    >
+                                        {char}
+                                    </AminoBox>
+                                );
+                            })}
+                        </ChunkedRow>
+                        <Box
+                            sx={{
+                                position: "absolute",
+                                top: "3px",
+                                left: "11px",
+                                color: "transparent",
+                                userSelect: "text",
+                                pointerEvents: "none",
+                                whiteSpace: "pre-wrap",
+                                width: "100%",
+                                height: "100%",
+                                fontFamily: "monospace",
+                                fontSize: "inherit",
+                                zIndex: -1,
+                                letterSpacing: "22px",
+                            }}
+                        >
+                            {chunk2}
+                        </Box>
+                    </Box>
                 </Box>
             );
         }
