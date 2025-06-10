@@ -31,11 +31,14 @@ const aminoAcidColors: Record<string, string> = {
   S: "#80bfff", T: "#80bfff", W: "#67e446", Y: "#67e446", V: "#67e446",
 };
 ```
+
+## 📦 Установка и запуск
+
 ```bash
-git clone https://github.com/your-username/alignment-tool.git
-cd alignment-tool
+git clone https://github.com/dmitrychervochkin/BIOCAD-test.git
+cd biocad-test
 npm install
-npm start
+npm run start
 ```
 
 📄 Валидация
@@ -53,4 +56,9 @@ npm start
 🧹 Очистка
 
 Кнопка “Очистить” сбрасывает поля и скрывает результат сравнения.
+
+👨‍💻 Автор
+
+Telegram: @chrvdevelop
+
 
