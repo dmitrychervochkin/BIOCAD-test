@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { styled, useMediaQuery, useTheme } from "@mui/system";
@@ -46,11 +46,70 @@ const AminoBox = styled(Box)<{ bgcolor: string }>(({ bgcolor }) => ({
     textAlign: "center",
 }));
 
+const Toast = ({ message, visible }: { message: string; visible: boolean }) => (
+    <Box
+        sx={{
+            position: "fixed",
+            top: 20,
+            right: 20,
+            padding: "10px 15px",
+            backgroundColor: "#4caf50",
+            color: "#fff",
+            borderRadius: 1,
+            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            fontFamily: "Arial, sans-serif",
+            fontSize: 14,
+            opacity: visible ? 1 : 0,
+            pointerEvents: "none",
+            transition: "opacity 0.3s ease",
+            zIndex: 9999,
+        }}
+    >
+        {message}
+    </Box>
+);
+
 const AlignmentTool: React.FC = () => {
     const [seq1, setSeq1] = useState("");
     const [seq2, setSeq2] = useState("");
     const [error, setError] = useState("");
     const [showAlignment, setShowAlignment] = useState(false);
+    const [toastVisible, setToastVisible] = useState(false);
+
+    useEffect(() => {
+        const onMouseUp = async () => {
+            const selection = window.getSelection();
+            if (!selection || selection.toString().trim().length === 0) return;
+
+            const anchorNode = selection.anchorNode;
+            const focusNode = selection.focusNode;
+
+            const container = document.getElementById("amino-list");
+            if (!container) return;
+
+            const isInsideContainer = (node: Node | null): boolean => {
+                if (!node) return false;
+                return container.contains(node);
+            };
+
+            if (isInsideContainer(anchorNode) && isInsideContainer(focusNode)) {
+                try {
+                    await navigator.clipboard.writeText(
+                        selection.toString().trim()
+                    );
+                    setToastVisible(true);
+                    setTimeout(() => setToastVisible(false), 1000);
+                } catch {
+                    console.warn("Не удалось скопировать в буфер обмена");
+                }
+            }
+        };
+
+        document.addEventListener("mouseup", onMouseUp);
+        return () => {
+            document.removeEventListener("mouseup", onMouseUp);
+        };
+    }, []);
 
     const handleSubmit = () => {
         setShowAlignment(false);
@@ -199,10 +258,16 @@ const AlignmentTool: React.FC = () => {
                         </Button>
                     </Grid>
                     {showAlignment && (
-                        <Grid>{renderAlignment(seq1, seq2)}</Grid>
+                        <Grid id="amino-list">
+                            {renderAlignment(seq1, seq2)}
+                        </Grid>
                     )}
                 </Grid>
             </Box>
+            <Toast
+                message="Последовательность скопирована"
+                visible={toastVisible}
+            />
         </Box>
     );
 };
