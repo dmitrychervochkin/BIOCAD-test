@@ -61,4 +61,8 @@ npm run start
 
 Telegram: @chrvdevelop
 
+---
+permalink: /index.html
+---
+
 
